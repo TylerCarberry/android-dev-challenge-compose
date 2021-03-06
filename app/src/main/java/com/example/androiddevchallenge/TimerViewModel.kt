@@ -23,7 +23,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class StopwatchViewModel : ViewModel() {
+class TimerViewModel : ViewModel() {
 
     private val _isRunning = MutableLiveData(false)
     val isRunning: LiveData<Boolean> = _isRunning

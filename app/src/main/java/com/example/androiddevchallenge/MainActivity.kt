@@ -68,16 +68,16 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun MyApp(stopwatchViewModel: StopwatchViewModel = viewModel()) {
-    val isRunning by stopwatchViewModel.isRunning.observeAsState(initial = false)
+fun MyApp(timerViewModel: TimerViewModel = viewModel()) {
+    val isRunning by timerViewModel.isRunning.observeAsState(initial = false)
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.stopwatch)) }) },
+        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.countdown_timer)) }) },
         floatingActionButton = {
             if (isRunning) {
-                Stop(stopwatchViewModel::stopTimer)
+                Stop(timerViewModel::stopTimer)
             } else {
-                Start(stopwatchViewModel::startTimer)
+                Start(timerViewModel::startTimer)
             }
         }
     ) {
@@ -86,10 +86,10 @@ fun MyApp(stopwatchViewModel: StopwatchViewModel = viewModel()) {
                 modifier = Modifier.padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val hours by stopwatchViewModel.hours.observeAsState(initial = 0)
-                val minutes by stopwatchViewModel.minutes.observeAsState(initial = 0)
-                val seconds by stopwatchViewModel.seconds.observeAsState(initial = 0)
-                val percent by stopwatchViewModel.percent.observeAsState(initial = 1f)
+                val hours by timerViewModel.hours.observeAsState(initial = 0)
+                val minutes by timerViewModel.minutes.observeAsState(initial = 0)
+                val seconds by timerViewModel.seconds.observeAsState(initial = 0)
+                val percent by timerViewModel.percent.observeAsState(initial = 1f)
 
                 Welcome(hours, minutes, seconds)
                 if (isRunning) {
@@ -198,9 +198,9 @@ fun NumPad() {
 }
 
 @Composable
-fun Digit(num: Int, stopwatchViewModel: StopwatchViewModel = viewModel()) {
+fun Digit(num: Int, timerViewModel: TimerViewModel = viewModel()) {
     OutlinedButton(
-        onClick = { stopwatchViewModel.onDigitPressed(num) },
+        onClick = { timerViewModel.onDigitPressed(num) },
         shape = RoundedCornerShape(percent = 50),
         modifier = Modifier
             .padding(8.dp)
@@ -212,9 +212,9 @@ fun Digit(num: Int, stopwatchViewModel: StopwatchViewModel = viewModel()) {
 }
 
 @Composable
-fun Backspace(stopwatchViewModel: StopwatchViewModel = viewModel()) {
+fun Backspace(timerViewModel: TimerViewModel = viewModel()) {
     OutlinedButton(
-        onClick = { stopwatchViewModel.backspace() },
+        onClick = { timerViewModel.backspace() },
         shape = RoundedCornerShape(percent = 50),
         modifier = Modifier
             .padding(8.dp)
